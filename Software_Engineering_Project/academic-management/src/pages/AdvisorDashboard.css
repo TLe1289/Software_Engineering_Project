@@ -1,0 +1,157 @@
+/* General styling */
+h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Standardize the width and padding for all containers */
+.container {
+  background-color: white;
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 1000px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Modal for Add/Drop Course */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  width: 600px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.student-id-input {
+  width: 80%;
+  padding: 10px;
+  margin: 20px auto;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Make the courses and students sections consistent with other dashboards */
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.courses-table, .students-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  table-layout: fixed; /* Keep table layout fixed */
+}
+
+.courses-table th, .courses-table td, .students-table th, .students-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+/* Adjust the column widths */
+.courses-table th:first-child, .courses-table td:first-child {
+  width: 20%; /* Increase width for "Course Prefix" */
+}
+
+.courses-table th:nth-child(2), .courses-table td:nth-child(2) {
+  width: 20%; /* Increase width for "Course Number" */
+}
+
+.courses-table th, .students-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+/* Add/Drop action select */
+.action-select {
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.drop-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Keep selected add/drop button colors */
+.add-selected {
+  background-color: #28a745;
+  color: white;
+}
+
+.drop-selected {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Button styling */
+.search-btn, .submit-change-btn, .close-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.search-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.search-btn:hover {
+  background-color: #0056b3;
+}
+
+.submit-change-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.submit-change-btn:hover {
+  background-color: #218838;
+}
+
+.close-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.close-btn:hover {
+  background-color: #c82333;
+}
+
+/* Error message */
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
