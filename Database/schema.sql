@@ -7,7 +7,10 @@ USE SchoolDatabase;
 CREATE TABLE Students (
     StudentID VARCHAR(10) PRIMARY KEY,
     Gender CHAR(1) NOT NULL,
-    Major VARCHAR(50)
+    Major VARCHAR(50),
+    GPA DECIMAL(3, 2) DEFAULT 0.00 CHECK (GPA BETWEEN 0 AND 4),
+    CreditsTaken INT DEFAULT 0,
+    CONSTRAINT CHK_StudentID_Format CHECK (StudentID LIKE 'U%')
 );
 
 -- Schema for Departments table
@@ -19,7 +22,7 @@ CREATE TABLE Departments (
     TotalHoursReq INT,
     AdvisorID VARCHAR(10),
     AdvisorPhone INT,
-    PRIMARY KEY (MajorOffered, AdvisorID)
+    PRIMARY KEY (DepartmentID, MajorOffered, AdvisorID)
 );
 
 -- Schema for Staffs table
@@ -42,10 +45,11 @@ CREATE TABLE InstructorCourse (
     InstructorID VARCHAR(10),
     CoursePrefix VARCHAR(10),
     CourseNumber INT,
-    Credits INT,
+    InstructorCredits INT CHECK (InstructorCredits BETWEEN 1 AND 4),
     Semester VARCHAR(10),
     YearTaught INT,
-    FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID)
+    FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID),
+    PRIMARY KEY (InstructorID, CoursePrefix, CourseNumber, Semester, YearTaught)
 );
 
 -- Schema for StudentCourse table
@@ -55,7 +59,9 @@ CREATE TABLE StudentCourse (
     CourseNumber INT,
     Semester VARCHAR(10),
     YearTaken INT,
-    Grade CHAR(1),
-    FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    Grade CHAR(1) CHECK (Grade IN ('A', 'B', 'C', 'D', 'F', 'I', 'S', 'U')),
+    Credits INT DEFAULT 3,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    PRIMARY KEY (StudentID, CoursePrefix, CourseNumber, Semester, YearTaken)
 );
 

@@ -80,7 +80,7 @@ INSERT INTO Instructors (InstructorID, InstructorPhone, DepartmentID, HiredSemes
 ('T12', '1802', 'D8', 'S2016'),
 ('T13', '6229', 'D7', 'S2016');
 
-INSERT INTO InstructorCourse (InstructorID, CoursePrefix, CourseNumber, Credits, Semester, YearTaught) VALUES
+INSERT INTO InstructorCourse (InstructorID, CoursePrefix, CourseNumber, InstructorCredits, Semester, YearTaught) VALUES
 ('T1', 'CNT', '4104', '4', 'S', '2019'),
 ('T1', 'CNT', '4104', '4', 'F', '2019'),
 ('T1', 'CNT', '4104', '4', 'F', '2020'),
