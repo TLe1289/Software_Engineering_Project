@@ -1,0 +1,61 @@
+{% extends "ui/base.html" %}
+
+{% block title %}Manage Instructors{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Manage Instructors</h1>
+
+    <!-- Add Instructor Form -->
+    <div class="card mb-4">
+        <div class="card-header">Add New Instructor</div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Add Instructor</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Instructor List -->
+    <h2>Existing Instructors</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Instructor ID</th>
+            <th>User</th>
+            <th>Department</th>
+            <th>Phone</th>
+            <th>Hired Semester</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for instructor in instructors %}
+            <tr>
+                <td>{{ instructor.instructor_id }}</td>
+                <td>{{ instructor.user.username }}</td>
+                <td>{{ instructor.department.department_id }}</td>
+                <td>{{ instructor.phone }}</td>
+                <td>{{ instructor.hired_semester }}</td>
+                <td>
+                    <a href="{% url 'edit_instructor' instructor.instructor_id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'delete_instructor' instructor.instructor_id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No instructors found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'landing_page' %}">Home</a>
+</li>
+{% endblock %}

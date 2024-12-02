@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="mb-4">Student Dashboard</h1>
+
+    <!-- Student Information -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3>Student Information</h3>
+        <p><strong>Student ID:</strong> {{ student.student_id }}</p>
+        <p><strong>Gender:</strong> {{ student.gender }}</p>
+        <p><strong>Major:</strong> {{ student.major }}</p>
+        <p><strong>Current GPA:</strong> {{ current_gpa }}</p>
+        <p><strong>Courses Taken:</strong> {{ courses_taken }}</p>
+      </div>
+    </div>
+
+    <!-- Courses List -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3>Courses Taken</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Semester</th>
+              <th>Year</th>
+              <th>Grade</th>
+              <th>Credits</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for course in student_courses %}
+            <tr>
+              <td>{{ course.course_prefix }} {{ course.course_number }}</td>
+              <td>{{ course.semester }}</td>
+              <td>{{ course.year_taken }}</td>
+              <td>{{ course.grade }}</td>
+              <td>{{ course.credits }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- What-If Analysis -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3>What-If GPA Analysis</h3>
+        <form method="POST" action="{% url 'calculate_scenario1' %}">
+          {% csrf_token %}
+          <h4>Impact of Future Courses</h4>
+          <div class="mb-3">
+            <label for="currentGPA" class="form-label">Current GPA</label>
+            <input type="number" step="0.1" name="currentGPA" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="numCoursesTaken" class="form-label">Number of Courses Taken</label>
+            <input type="number" name="numCoursesTaken" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="numCourses" class="form-label">Number of Future Courses</label>
+            <input type="number" name="numCourses" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="creditsPerCourse" class="form-label">Credits Per Course</label>
+            <input type="number" name="creditsPerCourse" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="averageGrade" class="form-label">Expected Grade</label>
+            <input type="text" name="averageGrade" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Calculate GPA</button>
+        </form>
+
+        <form method="POST" action="{% url 'calculate_scenario2' %}" class="mt-4">
+          {% csrf_token %}
+          <h4>Path to Desired GPA</h4>
+          <div class="mb-3">
+            <label for="currentGPA" class="form-label">Current GPA</label>
+            <input type="number" step="0.1" name="currentGPA" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="numCoursesTaken" class="form-label">Number of Courses Taken</label>
+            <input type="number" name="numCoursesTaken" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="desiredGPA" class="form-label">Desired GPA</label>
+            <input type="number" step="0.1" name="desiredGPA" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="creditsPerCourse" class="form-label">Credits Per Course</label>
+            <input type="number" name="creditsPerCourse" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="averageGrade" class="form-label">Expected Grade</label>
+            <input type="text" name="averageGrade" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Calculate Courses</button>
+        </form>
+
+        {% if result %}
+        <div class="alert alert-success mt-4">
+          <strong>Result:</strong> {{ result }}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

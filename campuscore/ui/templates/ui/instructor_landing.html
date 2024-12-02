@@ -1,0 +1,50 @@
+{% extends 'ui/base.html' %}
+
+{% block title %}Instructor Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Welcome, {{ user.first_name }} {{ user.last_name }}</h1>
+
+    <!-- Instructor Information -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2>Instructor Information</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Instructor ID:</strong> {{ instructor.instructor_id }}</p>
+            <p><strong>Department:</strong> {{ instructor.department.department_id }}</p>
+            <p><strong>Phone:</strong> {{ instructor.phone }}</p>
+            <p><strong>Hired Semester:</strong> {{ instructor.hired_semester }}</p>
+        </div>
+    </div>
+
+    <!-- Assigned Courses -->
+    <h3>Assigned Courses</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Semester</th>
+                <th>Year</th>
+                <th>Total Students</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in assigned_courses %}
+            <tr>
+                <td>{{ course.course.title }} ({{ course.course.course_prefix }} {{ course.course.course_number }})</td>
+                <td>{{ course.semester }}</td>
+                <td>{{ course.year_taught }}</td>
+                <td>{{ course.course.studentcourse_set.count }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No assigned courses found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "ui/base.html" %}
+
+{% block title %}Highest, Lowest, and Average GPA by Major{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Highest, Lowest, and Average GPA by Major</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Major</th>
+                <th>Highest GPA</th>
+                <th>Lowest GPA</th>
+                <th>Average GPA</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for major in report %}
+            <tr>
+                <td>{{ major.name }}</td>
+                <td>{{ major.highest_gpa|default:"N/A" }}</td>
+                <td>{{ major.lowest_gpa|default:"N/A" }}</td>
+                <td>{{ major.avg_gpa|default:"N/A" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'report_dashboard' %}">Home</a>
+</li>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'ui/base.html' %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Welcome, {{ user.first_name }} {{ user.last_name }}</h1>
+
+        <!-- Student Information -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Student Information</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Student ID:</strong> {{ student.student_id }}</p>
+                <p><strong>Gender:</strong> {{ student.get_gender_display }}</p>
+                <p><strong>Department:</strong> {{ student.department.department_id }}</p>
+                <p><strong>Major:</strong> {{ student.major.major_id }}</p>
+                <p><strong>GPA:</strong> {{ student.gpa }}</p>
+                <p><strong>Credits Taken:</strong> {{ student.credits_taken }}</p>
+            </div>
+        </div>
+
+        <!-- Enrolled Courses -->
+        <h3>Enrolled Courses</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Course</th>
+                <th>Semester</th>
+                <th>Year</th>
+                <th>Grade</th>
+                <th>Credits</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for course in enrolled_courses %}
+                <tr>
+                    <td>{{ course.course.title }}
+                        ({{ course.course.course_prefix }} {{ course.course.course_number }})
+                    </td>
+                    <td>{{ course.semester }}</td>
+                    <td>{{ course.year_taken }}</td>
+                    <td>{{ course.grade }}</td>
+                    <td>{{ course.course.credits }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No enrolled courses found.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'predicted_gpa_analysis' %}">What-If: Predicted GPA</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'desired_gpa_analysis' %}">What-If: Desired GPA</a>
+    </li>
+{% endblock %}

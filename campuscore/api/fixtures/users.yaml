@@ -1,0 +1,44 @@
+- model: auth.user
+  pk: 1
+  fields:
+    username: admin
+    email: admin@campuscore.com
+    password: pbkdf2_sha256$870000$A1X7gv2nuRgypyN0II7s1I$6JniJxaF0rqL12CyJD6nVDB4NStO84k+56EuLOb0iRQ=
+    is_superuser: true
+    is_staff: true
+
+- model: auth.user
+  pk: 2
+  fields:
+    username: student_user
+    email: student@example.com
+    password: pbkdf2_sha256$870000$A1X7gv2nuRgypyN0II7s1I$6JniJxaF0rqL12CyJD6nVDB4NStO84k+56EuLOb0iRQ=
+    is_staff: false
+    is_superuser: false
+
+- model: auth.user
+  pk: 3
+  fields:
+    username: staff_user
+    email: staff@example.com
+    password: pbkdf2_sha256$870000$A1X7gv2nuRgypyN0II7s1I$6JniJxaF0rqL12CyJD6nVDB4NStO84k+56EuLOb0iRQ=
+    is_staff: true
+    is_superuser: false
+
+- model: auth.user
+  pk: 4
+  fields:
+    username: instructor_user
+    email: instructor@example.com
+    password: pbkdf2_sha256$870000$A1X7gv2nuRgypyN0II7s1I$6JniJxaF0rqL12CyJD6nVDB4NStO84k+56EuLOb0iRQ=
+    is_staff: true
+    is_superuser: false
+
+- model: auth.user
+  pk: 5
+  fields:
+    username: advisor_user
+    email: advisor@example.com
+    password: pbkdf2_sha256$870000$A1X7gv2nuRgypyN0II7s1I$6JniJxaF0rqL12CyJD6nVDB4NStO84k+56EuLOb0iRQ=
+    is_staff: true
+    is_superuser: false

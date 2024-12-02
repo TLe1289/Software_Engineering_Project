@@ -1,0 +1,80 @@
+{% extends 'ui/base.html' %}
+
+{% block title %}Advisor Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Welcome, Advisor</h1>
+
+    <!-- Advisor Information -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2>Advisor Information</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Advisor ID:</strong> {{ advisor.advisor_id }}</p>
+            <p><strong>Department:</strong> {{ advisor.department.department_id }}</p>
+            <p><strong>Major:</strong> {{ advisor.major.major_id }}</p>
+            <p><strong>Building:</strong> {{ advisor.building }}</p>
+            <p><strong>Office:</strong> {{ advisor.office }}</p>
+            <p><strong>Phone:</strong> {{ advisor.phone }}</p>
+        </div>
+    </div>
+
+    <!-- Enrollment Actions -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2>Manage Student Enrollments</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Enrolled Students -->
+    <h2>Students in Your Major</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Major</th>
+            <th>GPA</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for student in students %}
+            <tr>
+                <td>{{ student.student_id }}</td>
+                <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                <td>{{ student.department.department_id }}</td>
+                <td>{{ student.major.major_id }}</td>
+                <td>{{ student.gpa }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No students found in your major.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'predicted_gpa_analysis' %}">What-If: Predicted GPA</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'desired_gpa_analysis' %}">What-If: Desired GPA</a>
+    </li>
+{% endblock %}
+

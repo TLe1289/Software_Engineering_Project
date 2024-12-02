@@ -1,0 +1,49 @@
+{% extends "ui/base.html" %}
+
+{% block title %}Instructor's Students by Major for Each Course{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Instructor's Students by Major for Each Course</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Instructor</th>
+                <th>Course</th>
+                <th>Semester</th>
+                <th>Year</th>
+                <th>Students by Major</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for instructor_course in report %}
+            <tr>
+                <td>{{ instructor_course.instructor.user.username }}</td>
+                <td>{{ instructor_course.course.title }}</td>
+                <td>{{ instructor_course.semester }}</td>
+                <td>{{ instructor_course.year_taught }}</td>
+                <td>
+                    <ul>
+                        {% for student_course in instructor_course.course.studentcourse_set.all %}
+                        <li>{{ student_course.student.major.name }}: {{ student_course.student.user.username }}</li>
+                        {% empty %}
+                        <li>No students enrolled</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No instructor-course data available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'report_dashboard' %}">Home</a>
+</li>
+{% endblock %}

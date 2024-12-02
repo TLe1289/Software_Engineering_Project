@@ -1,0 +1,32 @@
+{% extends "ui/base.html" %}
+
+{% block title %}Department GPA Rankings{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Department GPA Rankings</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Department</th>
+                <th>Average GPA</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for department in report %}
+            <tr>
+                <td>{{ department.name }}</td>
+                <td>{{ department.avg_gpa|default:"N/A" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'report_dashboard' %}">Home</a>
+</li>
+{% endblock %}

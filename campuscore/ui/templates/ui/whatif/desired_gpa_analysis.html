@@ -1,0 +1,33 @@
+{% extends "ui/base.html" %}
+
+{% block title %}Desired GPA Analysis{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <div class="card">
+        <div class="card-header">
+            <h2>What-If Analysis: Desired GPA</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </form>
+        </div>
+    </div>
+
+    {% if result %}
+    <div class="alert alert-info mt-4">
+        {{ result }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'landing_page' %}">Home</a>
+</li>
+{% endblock %}

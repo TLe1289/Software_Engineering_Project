@@ -1,0 +1,99 @@
+- model: api.Major
+  pk: 1
+  fields:
+    major_id: CS
+    department: D1
+    total_hours_required: 122
+
+- model: api.Major
+  pk: 2
+  fields:
+    major_id: IT
+    department: D1
+    total_hours_required: 124
+
+- model: api.Major
+  pk: 3
+  fields:
+    major_id: CyS
+    department: D1
+    total_hours_required: 126
+
+- model: api.Department
+  pk: 1
+  fields:
+    department_id: D1
+    building: Main
+    office: '101'
+
+- model: api.Department
+  pk: 2
+  fields:
+    department_id: D2
+    building: East Wing
+    office: '201'
+
+- model: api.Advisor
+  fields:
+    user: 5
+    major: CS
+    advisor_id: A1
+    department: D1
+    phone: 1234567890
+
+- model: api.Student
+  fields:
+    student_id: S1
+    user: 2
+    gender: M
+    major: CS
+    gpa: 3.5
+    credits_taken: 90
+
+- model: api.Staff
+  fields:
+    user: 3
+    staff_id: S1
+    department: D1
+    phone: 1001
+
+- model: api.Instructor
+  fields:
+    user: 4
+    instructor_id: I1
+    department: D1
+    phone: 2001
+    hired_semester: Fall 2020
+
+- model: api.Course
+  pk: 1
+  fields:
+    course_prefix: CS
+    course_number: 101
+    title: Introduction to Computer Science
+    credits: 3
+
+- model: api.Course
+  pk: 2
+  fields:
+    course_prefix: IT
+    course_number: 201
+    title: Networking Basics
+    credits: 4
+
+- model: api.InstructorCourse
+  pk: 1
+  fields:
+    instructor: I1
+    course: 1
+    semester: Fall
+    year_taught: 2021
+
+- model: api.StudentCourse
+  pk: 1
+  fields:
+    student: S1
+    course: 1
+    semester: Fall
+    year_taken: 2021
+    grade: A

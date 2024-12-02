@@ -1,0 +1,32 @@
+{% extends "ui/base.html" %}
+
+{% block title %}Reporting Page{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Reports</h1>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="{% url 'report_highest_lowest_avg_gpa' %}">Highest, Lowest, and Average GPA of Students by Major</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{% url 'report_department_gpa_rank' %}">Department GPA Rankings</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{% url 'report_course_enrollments' %}">Course Enrollments and Average Grades by Semester</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{% url 'report_instructor_students' %}">Instructor's Students by Major for Each Course</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{% url 'report_students_by_credits' %}">Students by Major Sorted by Total Credits Taken</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block nav_items %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'landing_page' %}">Home</a>
+</li>
+{% endblock %}
